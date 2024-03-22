@@ -1,4 +1,5 @@
 using DockerDiscordBot.Commands;
+using DockerDiscordBot.Commands.GetContainers;
 using DockerDiscordBot.Commands.Ping;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,11 +10,13 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCommands(this IServiceCollection services)
     {
-        services.AddCommandHandler<PingCommand, PingCommandHandler>();
+        services
+            .AddCommandHandler<PingCommand, PingCommandHandler>()
+            .AddCommandHandler<GetContainersCommand, GetContainersCommandHandler>();
 
         return services;
     }
-    
+
     private static IServiceCollection AddCommandHandler<TCommand, TCommandHandler>(this IServiceCollection services)
         where TCommand : Command
         where TCommandHandler : class, IRequestHandler<TCommand>

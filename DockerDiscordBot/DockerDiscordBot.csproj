@@ -10,23 +10,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Discord.Net.Interactions" Version="3.14.1" />
-      <PackageReference Include="Docker.DotNet" Version="3.125.15" />
-      <PackageReference Include="MediatR" Version="12.2.0" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+        <PackageReference Include="Discord.Net.Interactions" Version="3.14.1"/>
+        <PackageReference Include="Docker.DotNet" Version="3.125.15"/>
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0"/>
     </ItemGroup>
 
 </Project>

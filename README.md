@@ -4,13 +4,11 @@
 
 General:
 
-- [ ] Docker Client Setup
 - [ ] Docker Deployment
 - [ ] CI/CD Pipeline
 
 Docker functions:
 
-- [ ] List all containers
 - [ ] List all images
 - [ ] Create a container
 - [ ] Delete a container
@@ -19,7 +17,6 @@ Docker functions:
 - [ ] Stop a container
 - [ ] Restart a container
 
-!dockerps: Lists all running Docker containers.
 !dockerpull [image_name]: Pulls a Docker image from the Docker Hub.
 !dockerrun [image_name]: Runs a Docker container from a pulled image.
 !dockerstop [container_id]: Stops a running Docker container by ID.

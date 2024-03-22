@@ -11,10 +11,10 @@ namespace DockerDiscordBot.Services;
 
 public sealed class DiscordService : IDiscordService
 {
-    private readonly ILogger<DiscordService> _logger;
-    private readonly DiscordSocketClient _client;
-    private readonly string _token;
     private readonly IMediator _bus;
+    private readonly DiscordSocketClient _client;
+    private readonly ILogger<DiscordService> _logger;
+    private readonly string _token;
 
     public DiscordService(
         DiscordSocketClient client,

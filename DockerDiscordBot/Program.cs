@@ -38,10 +38,13 @@ public sealed class Program
             .AddOptions<ApplicationSettings>()
             .Bind(_configuration.GetSection("ApplicationSettings"))
             .Validate(x =>
-                !string.IsNullOrWhiteSpace(x.DiscordToken),
+                    !string.IsNullOrWhiteSpace(x.DiscordToken),
                 "Discord token is required.")
+            .Validate(x =>
+                    !string.IsNullOrWhiteSpace(x.DockerHost),
+                "Docker host is required.")
             .ValidateOnStart();
-        
+
         services.AddMediatR(config =>
             config.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
@@ -51,14 +54,15 @@ public sealed class Program
         services.AddScoped<IDiscordService, DiscordService>();
 
         services
-            .AddSingleton(new DiscordSocketConfig()
+            .AddSingleton(new DiscordSocketConfig
             {
-                GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.GuildMembers | GatewayIntents.MessageContent
+                GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.GuildMembers |
+                                 GatewayIntents.MessageContent
             })
             .AddSingleton<DiscordSocketClient>();
 
         services.AddLogging(configure =>
-            {
+        {
             configure.ClearProviders();
             configure.AddConfiguration(_configuration);
             configure.AddSimpleConsole(options =>
