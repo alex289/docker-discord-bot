@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Discord;
 using Discord.WebSocket;
+using DockerDiscordBot.Extensions;
 using DockerDiscordBot.Interfaces;
 using DockerDiscordBot.Services;
 using DockerDiscordBot.Settings;
@@ -40,6 +41,11 @@ public sealed class Program
                 !string.IsNullOrWhiteSpace(x.DiscordToken),
                 "Discord token is required.")
             .ValidateOnStart();
+        
+        services.AddMediatR(config =>
+            config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+        services.AddCommands();
 
         services.AddScoped<IDockerService, DockerService>();
         services.AddScoped<IDiscordService, DiscordService>();

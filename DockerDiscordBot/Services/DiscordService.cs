@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using DockerDiscordBot.Extensions;
 using DockerDiscordBot.Interfaces;
 using DockerDiscordBot.Settings;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -13,14 +14,16 @@ public sealed class DiscordService : IDiscordService
     private readonly ILogger<DiscordService> _logger;
     private readonly DiscordSocketClient _client;
     private readonly string _token;
+    private readonly IMediator _bus;
 
     public DiscordService(
         DiscordSocketClient client,
         ILogger<DiscordService> logger,
-        IOptions<ApplicationSettings> options)
+        IOptions<ApplicationSettings> options, IMediator bus)
     {
         _client = client;
         _logger = logger;
+        _bus = bus;
         _token = options.Value.DiscordToken;
     }
 
@@ -29,7 +32,6 @@ public sealed class DiscordService : IDiscordService
         _client.Log += _logger.LogMessageAsync;
         _client.Ready += ReadyAsync;
         _client.MessageReceived += MessageReceivedAsync;
-        _client.InteractionCreated += InteractionCreatedAsync;
 
         await _client.LoginAsync(TokenType.Bot, _token);
         await _client.StartAsync();
@@ -49,29 +51,14 @@ public sealed class DiscordService : IDiscordService
             return;
         }
 
+        var command = message.GetCommand();
 
-        if (message.Content == "!ping")
+        if (command is null)
         {
-            _logger.LogInformation("Received a ping command!");
-            var cb = new ComponentBuilder()
-                .WithButton("Click me!", "unique-id");
-
-            await message.Channel.SendMessageAsync("pong!", components: cb.Build());
+            _logger.LogWarning("Unhandled command: {Command}", message.Content);
+            return;
         }
-    }
 
-    private static async Task InteractionCreatedAsync(SocketInteraction interaction)
-    {
-        if (interaction is SocketMessageComponent component)
-        {
-            if (component.Data.CustomId == "unique-id")
-            {
-                await interaction.RespondAsync("Thank you for clicking my button!");
-            }
-            else
-            {
-                Console.WriteLine("An ID has been received that has no handler!");
-            }
-        }
+        await _bus.Send(command);
     }
 }

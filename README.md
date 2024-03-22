@@ -4,7 +4,6 @@
 
 General:
 
-- [ ] Add MediatR
 - [ ] Docker Client Setup
 - [ ] Docker Deployment
 - [ ] CI/CD Pipeline
