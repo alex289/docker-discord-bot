@@ -1,4 +1,9 @@
 ﻿using System.Reflection;
+using Discord;
+using Discord.WebSocket;
+using DockerDiscordBot.Interfaces;
+using DockerDiscordBot.Services;
+using DockerDiscordBot.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,6 +33,24 @@ public sealed class Program
 
     private static IServiceCollection ConfigureServices(IServiceCollection services)
     {
+        services
+            .AddOptions<ApplicationSettings>()
+            .Bind(_configuration.GetSection("ApplicationSettings"))
+            .Validate(x =>
+                !string.IsNullOrWhiteSpace(x.DiscordToken),
+                "Discord token is required.")
+            .ValidateOnStart();
+
+        services.AddScoped<IDockerService, DockerService>();
+        services.AddScoped<IDiscordService, DiscordService>();
+
+        services
+            .AddSingleton(new DiscordSocketConfig()
+            {
+                GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.GuildMembers | GatewayIntents.MessageContent
+            })
+            .AddSingleton<DiscordSocketClient>();
+
         services.AddLogging(configure =>
             {
             configure.ClearProviders();
@@ -47,6 +70,9 @@ public sealed class Program
     {
         var logger = _services.GetRequiredService<ILogger<Program>>();
         logger.LogInformation("Bot starting...");
+
+        var client = _services.GetRequiredService<IDiscordService>();
+        await client.StartAsync();
 
         await Task.Delay(Timeout.Infinite);
     }

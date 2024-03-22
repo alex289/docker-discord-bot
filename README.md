@@ -4,17 +4,10 @@
 
 General:
 
-- [ ] Dotnet Console App
-- [ ] General Setup (Logger, Configuration, etc.)
-- [ ] Discord Bot Setup
+- [ ] Add MediatR
 - [ ] Docker Client Setup
 - [ ] Docker Deployment
 - [ ] CI/CD Pipeline
-- [ ] License, Readme, etc.
-
-Discord functions:
-
-- [ ] Ping-Pong
 
 Docker functions:
 
