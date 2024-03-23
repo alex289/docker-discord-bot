@@ -23,7 +23,7 @@ An easy-to-use Discord bot to manage your Docker containers.
 
 ### Docker Setup
 
-Just run the following command:
+Run the following command to start the Docker container:
 
 ```bash
 docker run \
