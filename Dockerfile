@@ -18,4 +18,7 @@ RUN dotnet publish "DockerDiscordBot.csproj" -c $BUILD_CONFIGURATION -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+LABEL org.opencontainers.image.authors="Alexander Konietzko"
+LABEL org.opencontainers.image.title="Docker Discord Bot"
+LABEL org.opencontainers.image.description="An easy-to-use Discord bot to manage your Docker containers"
 ENTRYPOINT ["dotnet", "DockerDiscordBot.dll"]
