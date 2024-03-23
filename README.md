@@ -9,6 +9,7 @@ An easy-to-use Discord bot to manage your Docker containers.
 
 | Command | Description |
 | --- | --- |
+| `!help` | Show all available commands |
 | `!ping` | Check if the bot is online |
 | `!dockerps` | List all running Docker containers |
 | `!dockerstop <container>` | Stop a Docker container |
