@@ -55,4 +55,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: alex289/docker-discord-bot
+          repository: alexdev28/docker-discord-bot
