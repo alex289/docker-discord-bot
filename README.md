@@ -75,7 +75,7 @@ The bot can be configured using environment variables:
 | Environment Variable | Description | Default Value | Required |
 | --- | --- | --- | --- |
 | `ApplicationSettings__DiscordToken` | Discord bot token | `null` | ✅ |
-| `ApplicationSettings__AdminUser` | Discord admin username | `null` | ✅ |
+| `ApplicationSettings__AdminUser` | Discord admin username | `null` | ❌ |
 | `ApplicationSettings__CommandPrefix` | Command prefix | `!` | ❌ |
 
 ## License
