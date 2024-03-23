@@ -1,6 +1,7 @@
 # Docker Discord Bot
 
-[![license](https://badgen.net/github/license/alex289/docker-discord-bot)](https://github.com/alex289/docker-discord-bot/blob/main/LICENSE)
+![GitHub License](https://img.shields.io/github/license/alex289/docker-discord-bot)
+![Docker Pulls](https://img.shields.io/docker/pulls/alexdev28/docker-discord-bot)
 
 An easy-to-use Discord bot to manage your Docker containers.
 
