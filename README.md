@@ -5,14 +5,19 @@
 
 An easy-to-use Discord bot to manage your Docker containers.
 
-## Features
+## Commands
 
--  Ping the bot to check if it's online
--  Create and remove Docker containers
--  Start, stop, and restart Docker containers
--  List all running Docker containers
--  Get detailed information about a specific Docker container
--  Get detailed information about the host system
+| Command | Description |
+| --- | --- |
+| `!ping` | Check if the bot is online |
+| `!dockerps` | List all running Docker containers |
+| `!dockerstop <container>` | Stop a Docker container |
+| `!dockerstart <container>` | Start a Docker container |
+| `!dockerrestart <container>` | Restart a Docker container |
+| `!dockerremove <container>` | Remove a Docker container |
+| `!dockershow <container>` | Show information about a Docker container |
+| `!dockercreate <image> <name>` | Create a new Docker container |
+| `!dockerinfo` | Show information about the Docker host |
 
 ## Installation 🚀
 
