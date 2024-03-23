@@ -50,15 +50,15 @@ public sealed class DiscordService : IDiscordService
         {
             return;
         }
-        
-        var command = message.GetCommand();
+
+        var command = message.GetCommand(_options.CommandPrefix);
 
         if (command is null)
         {
             _logger.LogDebug("Command not found: {Message}", message.Content);
             return;
         }
-        
+
         if (!string.IsNullOrWhiteSpace(_options.AdminUser) && message.Author.Username != _options.AdminUser)
         {
             _logger.LogDebug("Unauthorized user: {User}", message.Author.Username);

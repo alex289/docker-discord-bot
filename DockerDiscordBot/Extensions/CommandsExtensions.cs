@@ -6,11 +6,9 @@ namespace DockerDiscordBot.Extensions;
 
 public static class CommandsExtensions
 {
-    private static readonly string s_prefix = "!";
-
-    public static Command? GetCommand(this SocketMessage message)
+    public static Command? GetCommand(this SocketMessage message, string prefix)
     {
-        if (!message.Content.StartsWith(s_prefix))
+        if (!message.Content.StartsWith(prefix))
         {
             return null;
         }

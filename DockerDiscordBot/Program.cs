@@ -8,6 +8,7 @@ using DockerDiscordBot.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DockerDiscordBot;
 
@@ -38,11 +39,14 @@ public sealed class Program
             .AddOptions<ApplicationSettings>()
             .Bind(_configuration.GetSection("ApplicationSettings"))
             .Validate(x =>
-                !string.IsNullOrWhiteSpace(x.DiscordToken),
+                    !string.IsNullOrWhiteSpace(x.DiscordToken),
                 "Discord token is required.")
             .Validate(x =>
-                !string.IsNullOrWhiteSpace(x.DockerHost),
+                    !string.IsNullOrWhiteSpace(x.DockerHost),
                 "Docker host is required.")
+            .Validate(x =>
+                    !string.IsNullOrWhiteSpace(x.CommandPrefix),
+                "Command prefix is required.")
             .ValidateOnStart();
 
         services.AddMediatR(config =>
@@ -80,6 +84,10 @@ public sealed class Program
     {
         var logger = _services.GetRequiredService<ILogger<Program>>();
         logger.LogInformation("Bot starting...");
+
+        var options = _services.GetRequiredService<IOptions<ApplicationSettings>>().Value;
+        logger.LogInformation("Command prefix: {Prefix}", options.CommandPrefix);
+        logger.LogInformation("Admin user: {User}", options.AdminUser);
 
         var client = _services.GetRequiredService<IDiscordService>();
         await client.StartAsync();
