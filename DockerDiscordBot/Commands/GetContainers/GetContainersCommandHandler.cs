@@ -1,4 +1,4 @@
-using System.Text;
+using Discord;
 using DockerDiscordBot.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -36,14 +36,19 @@ public sealed class GetContainersCommandHandler : IRequestHandler<GetContainersC
             return;
         }
 
-        var response = new StringBuilder();
-        response.AppendLine("Containers:");
-
         foreach (var container in containers)
         {
-            response.AppendLine($"- {container.Names.FirstOrDefault()}#{container.ID} ({container.Status})");
-        }
+            var embed = new EmbedBuilder()
+                .WithTitle(container.Names.FirstOrDefault())
+                .AddField("ID", container.ID)
+                .AddField("Image", container.Image)
+                .AddField("State", container.State)
+                .AddField("State", container.Status)
+                .WithColor(Color.Blue)
+                .WithCurrentTimestamp()
+                .Build();
 
-        await request.Message.Channel.SendMessageAsync(response.ToString());
+            await request.Message.Channel.SendMessageAsync(embed: embed);
+        }
     }
 }

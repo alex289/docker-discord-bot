@@ -9,4 +9,12 @@ public interface IDockerService
     Task<bool> StartContainerAsync(string containerId, CancellationToken cancellationToken);
     Task<bool> RestartContainerAsync(string containerId, CancellationToken cancellationToken);
     Task<bool> RemoveContainerAsync(string containerId, CancellationToken cancellationToken);
+
+    Task<string?> CreateContainerAsync(
+        string image,
+        string name,
+        CancellationToken cancellationToken);
+
+    Task<ContainerInspectResponse?> GetContainerAsync(string containerId, CancellationToken cancellationToken);
+    Task<SystemInfoResponse?> GetDockerInfoAsync(CancellationToken cancellationToken);
 }

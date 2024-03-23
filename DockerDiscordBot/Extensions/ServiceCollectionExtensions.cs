@@ -1,8 +1,11 @@
 using DockerDiscordBot.Commands;
+using DockerDiscordBot.Commands.CreateContainer;
 using DockerDiscordBot.Commands.GetContainers;
+using DockerDiscordBot.Commands.GetDockerInfo;
 using DockerDiscordBot.Commands.Ping;
 using DockerDiscordBot.Commands.RemoveContainer;
 using DockerDiscordBot.Commands.RestartContainer;
+using DockerDiscordBot.Commands.ShowContainer;
 using DockerDiscordBot.Commands.StartContainer;
 using DockerDiscordBot.Commands.StopContainer;
 using MediatR;
@@ -20,7 +23,10 @@ public static class ServiceCollectionExtensions
             .AddCommandHandler<StopContainerCommand, StopContainerCommandHandler>()
             .AddCommandHandler<StartContainerCommand, StartContainerCommandHandler>()
             .AddCommandHandler<RestartContainerCommand, RestartContainerCommandHandler>()
-            .AddCommandHandler<RemoveContainerCommand, RemoveContainerCommandHandler>();
+            .AddCommandHandler<RemoveContainerCommand, RemoveContainerCommandHandler>()
+            .AddCommandHandler<GetDockerInfoCommand, GetDockerInfoCommandHandler>()
+            .AddCommandHandler<CreateContainerCommand, CreateContainerCommandHandler>()
+            .AddCommandHandler<ShowContainerCommand, ShowContainerCommandHandler>();
 
         return services;
     }

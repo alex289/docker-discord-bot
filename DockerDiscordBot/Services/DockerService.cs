@@ -46,12 +46,12 @@ public sealed class DockerService : IDockerService
         {
             return await _client.Containers.StopContainerAsync(
                 containerId,
-                null,
+                new ContainerStopParameters(),
                 cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to stop containers {ContainerId}.", containerId);
+            _logger.LogError(ex, "Failed to stop container {ContainerId}.", containerId);
             return false;
         }
     }
@@ -62,12 +62,12 @@ public sealed class DockerService : IDockerService
         {
             return await _client.Containers.StartContainerAsync(
                 containerId,
-                null,
+                new ContainerStartParameters(),
                 cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to start containers {ContainerId}.", containerId);
+            _logger.LogError(ex, "Failed to start container {ContainerId}.", containerId);
             return false;
         }
     }
@@ -78,13 +78,13 @@ public sealed class DockerService : IDockerService
         {
             await _client.Containers.RestartContainerAsync(
                 containerId,
-                null,
+                new ContainerRestartParameters(),
                 cancellationToken);
             return true;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to start containers {ContainerId}.", containerId);
+            _logger.LogError(ex, "Failed to start container {ContainerId}.", containerId);
             return false;
         }
     }
@@ -95,14 +95,66 @@ public sealed class DockerService : IDockerService
         {
             await _client.Containers.RemoveContainerAsync(
                 containerId,
-                null,
+                new ContainerRemoveParameters(),
                 cancellationToken);
             return true;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to remove containers {ContainerId}.", containerId);
+            _logger.LogError(ex, "Failed to remove container {ContainerId}.", containerId);
             return false;
+        }
+    }
+
+    public async Task<string?> CreateContainerAsync(
+        string image,
+        string name,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var result = await _client.Containers.CreateContainerAsync(
+                new CreateContainerParameters
+                {
+                    Image = image,
+                    Name = name
+                },
+                cancellationToken);
+            return result.ID;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to start container {ContainerName}.", name);
+            return null;
+        }
+    }
+
+    public async Task<ContainerInspectResponse?> GetContainerAsync(string containerId,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _client.Containers.InspectContainerAsync(
+                containerId,
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get container {ContainerId}.", containerId);
+            return null;
+        }
+    }
+
+    public async Task<SystemInfoResponse?> GetDockerInfoAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _client.System.GetSystemInfoAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get docker system information.");
+            return null;
         }
     }
 }
