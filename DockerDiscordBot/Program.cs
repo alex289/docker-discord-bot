@@ -38,10 +38,10 @@ public sealed class Program
             .AddOptions<ApplicationSettings>()
             .Bind(_configuration.GetSection("ApplicationSettings"))
             .Validate(x =>
-                    !string.IsNullOrWhiteSpace(x.DiscordToken),
+                !string.IsNullOrWhiteSpace(x.DiscordToken),
                 "Discord token is required.")
             .Validate(x =>
-                    !string.IsNullOrWhiteSpace(x.DockerHost),
+                !string.IsNullOrWhiteSpace(x.DockerHost),
                 "Docker host is required.")
             .ValidateOnStart();
 

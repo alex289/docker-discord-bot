@@ -5,6 +5,15 @@
 
 An easy-to-use Discord bot to manage your Docker containers.
 
+## Table of Contents
+
+- [Commands](#commands)
+- [Installation](#installation)
+  - [Discord Bot Setup](#discord-bot-setup)
+  - [Docker Setup](#docker-setup)
+  - [Configuration](#configuration)
+- [License](#license)
+
 ## Commands
 
 | Command | Description |
@@ -58,6 +67,17 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
+
+### Configuration
+
+The bot can be configured using environment variables:
+
+| Environment Variable | Description | Default Value | Required |
+| --- | --- | --- | --- |
+| `ApplicationSettings__DiscordToken` | Discord bot token | `null` | ✅ |
+| `ApplicationSettings__AdminUser` | Discord admin username | `null` | ✅ |
+| `ApplicationSettings__CommandPrefix` | Command prefix | `!` | ❌ |
+| `ApplicationSettings__EmbedColor` | Embed color | `#7289DA` | ❌ |
 
 ## License
 

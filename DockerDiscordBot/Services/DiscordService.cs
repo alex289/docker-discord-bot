@@ -14,7 +14,7 @@ public sealed class DiscordService : IDiscordService
     private readonly IMediator _bus;
     private readonly DiscordSocketClient _client;
     private readonly ILogger<DiscordService> _logger;
-    private readonly string _token;
+    private readonly ApplicationSettings _options;
 
     public DiscordService(
         DiscordSocketClient client,
@@ -24,7 +24,7 @@ public sealed class DiscordService : IDiscordService
         _client = client;
         _logger = logger;
         _bus = bus;
-        _token = options.Value.DiscordToken;
+        _options = options.Value;
     }
 
     public async Task StartAsync()
@@ -33,7 +33,7 @@ public sealed class DiscordService : IDiscordService
         _client.Ready += ReadyAsync;
         _client.MessageReceived += MessageReceivedAsync;
 
-        await _client.LoginAsync(TokenType.Bot, _token);
+        await _client.LoginAsync(TokenType.Bot, _options.DiscordToken);
         await _client.StartAsync();
     }
 
@@ -50,12 +50,19 @@ public sealed class DiscordService : IDiscordService
         {
             return;
         }
-
+        
         var command = message.GetCommand();
 
         if (command is null)
         {
-            _logger.LogWarning("Unhandled command: {Command}", message.Content);
+            _logger.LogDebug("Command not found: {Message}", message.Content);
+            return;
+        }
+        
+        if (!string.IsNullOrWhiteSpace(_options.AdminUser) && message.Author.Username != _options.AdminUser)
+        {
+            _logger.LogDebug("Unauthorized user: {User}", message.Author.Username);
+            await message.Channel.SendMessageAsync("You are not authorized to use this bot.");
             return;
         }
 
