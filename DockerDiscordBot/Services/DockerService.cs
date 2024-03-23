@@ -39,4 +39,70 @@ public sealed class DockerService : IDockerService
             return null;
         }
     }
+
+    public async Task<bool> StopContainerAsync(string containerId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _client.Containers.StopContainerAsync(
+                containerId,
+                null,
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to stop containers {ContainerId}.", containerId);
+            return false;
+        }
+    }
+
+    public async Task<bool> StartContainerAsync(string containerId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _client.Containers.StartContainerAsync(
+                containerId,
+                null,
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to start containers {ContainerId}.", containerId);
+            return false;
+        }
+    }
+
+    public async Task<bool> RestartContainerAsync(string containerId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _client.Containers.RestartContainerAsync(
+                containerId,
+                null,
+                cancellationToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to start containers {ContainerId}.", containerId);
+            return false;
+        }
+    }
+
+    public async Task<bool> RemoveContainerAsync(string containerId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _client.Containers.RemoveContainerAsync(
+                containerId,
+                null,
+                cancellationToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to remove containers {ContainerId}.", containerId);
+            return false;
+        }
+    }
 }

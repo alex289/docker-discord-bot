@@ -2,6 +2,10 @@ using Discord.WebSocket;
 using DockerDiscordBot.Commands;
 using DockerDiscordBot.Commands.GetContainers;
 using DockerDiscordBot.Commands.Ping;
+using DockerDiscordBot.Commands.RemoveContainer;
+using DockerDiscordBot.Commands.RestartContainer;
+using DockerDiscordBot.Commands.StartContainer;
+using DockerDiscordBot.Commands.StopContainer;
 
 namespace DockerDiscordBot.Extensions;
 
@@ -12,7 +16,11 @@ public static class CommandsExtensions
     private static readonly Dictionary<string, Type> s_commands = new()
     {
         { "ping", typeof(PingCommand) },
-        { "dockerps", typeof(GetContainersCommand) }
+        { "dockerps", typeof(GetContainersCommand) },
+        { "dockerstop", typeof(StopContainerCommand) },
+        { "dockerstart", typeof(StartContainerCommand) },
+        { "dockerrestart", typeof(RestartContainerCommand) },
+        { "dockerremove", typeof(RemoveContainerCommand) }
     };
 
     public static Command? GetCommand(this SocketMessage message)
