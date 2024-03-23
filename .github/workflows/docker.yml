@@ -7,7 +7,7 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  deploy_docker:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -38,7 +38,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            alex289/docker-discord-bot
+            alexdev28/docker-discord-bot
             ghcr.io/${{ github.repository }}
 
       - name: Build and push Docker image 🚀

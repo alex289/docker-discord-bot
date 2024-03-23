@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 jobs:
-  ci:
+  build_and_test:
     runs-on: ubuntu-latest
     env:
       solutionFile: CleanArchitecture.sln
