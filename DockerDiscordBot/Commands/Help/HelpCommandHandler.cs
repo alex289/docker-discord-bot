@@ -14,10 +14,10 @@ public sealed class HelpCommandHandler : IRequestHandler<HelpCommand>
 
     public HelpCommandHandler(
         ILogger<HelpCommandHandler> logger,
-        IOptions<ApplicationSettings> _options)
+        IOptions<ApplicationSettings> options)
     {
         _logger = logger;
-        _commandPrefix = _options.Value.CommandPrefix;
+        _commandPrefix = options.Value.CommandPrefix;
     }
 
     public async Task Handle(HelpCommand request, CancellationToken cancellationToken)

@@ -13,9 +13,9 @@ public static class CommandsExtensions
             return null;
         }
 
-        var command = message.Content.Substring(1).Split(' ')[0];
+        var command = message.Content.Substring(1).Split(' ').FirstOrDefault();
 
-        if (!CommandMapping.Commands.ContainsKey(command))
+        if (command is null || !CommandMapping.Commands.ContainsKey(command))
         {
             return null;
         }
