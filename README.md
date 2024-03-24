@@ -26,7 +26,7 @@ An easy-to-use Discord bot to manage your Docker containers.
 | `!dockerrestart <container>` | Restart a Docker container |
 | `!dockerremove <container>` | Remove a Docker container |
 | `!dockershow <container>` | Show information about a Docker container |
-| `!dockercreate <image> <name>` | Create a new Docker container |
+| `!dockercreate <image>:<tag>/<image> <name> <ports (80:80,81:81)>` | Create a new Docker container |
 | `!dockerinfo` | Show information about the Docker host |
 | `!dockerimages` | List all existing images |
 | `!dockerpull <image>:<tag>/<image>` | Pull an image |

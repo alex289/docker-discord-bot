@@ -109,15 +109,37 @@ public sealed class DockerService : IDockerService
     public async Task<string?> CreateContainerAsync(
         string image,
         string name,
+        Dictionary<string, string> ports,
         CancellationToken cancellationToken)
     {
+        var exposedPorts = new Dictionary<string, EmptyStruct>();
+        var portBindings = new Dictionary<string, IList<PortBinding>>();
+
+        foreach (var (key, value) in ports)
+        {
+            exposedPorts[key] = default;
+            portBindings[key] = new List<PortBinding>
+            {
+                new()
+                {
+                    HostPort = value
+                }
+            };
+        }
+
         try
         {
             var result = await _client.Containers.CreateContainerAsync(
                 new CreateContainerParameters
                 {
                     Image = image,
-                    Name = name
+                    Name = name,
+                    ExposedPorts = exposedPorts,
+                    HostConfig = new HostConfig
+                    {
+                        PortBindings = portBindings,
+                        PublishAllPorts = true
+                    }
                 },
                 cancellationToken);
             return result.ID;

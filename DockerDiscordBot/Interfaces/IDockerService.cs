@@ -13,6 +13,7 @@ public interface IDockerService
     Task<string?> CreateContainerAsync(
         string image,
         string name,
+        Dictionary<string, string> ports,
         CancellationToken cancellationToken);
 
     Task<ContainerInspectResponse?> GetContainerAsync(string containerId, CancellationToken cancellationToken);
