@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.4.0] - 2024-03-24
+### :sparkles: New Features
+- [`aecbed5`](https://github.com/alex289/docker-discord-bot/commit/aecbed5a1a865f7344c18edd65e2993e1969d482) - Add list, pull and remove image commands *(commit by [@alex289](https://github.com/alex289))*
+- [`be04aca`](https://github.com/alex289/docker-discord-bot/commit/be04aca963814c51156f11edbb25f0718f29c565) - Add ports to created container and check for image *(commit by [@alex289](https://github.com/alex289))*
+- [`704c8fd`](https://github.com/alex289/docker-discord-bot/commit/704c8fde51124555a300bf49f7c3a9b03cda6593) - Add option for private registries *(commit by [@alex289](https://github.com/alex289))*
+
+
 ## [v1.3.0] - 2024-03-24
 ### :bug: Bug Fixes
 - [`ff2cef3`](https://github.com/alex289/docker-discord-bot/commit/ff2cef382656dd8a0977e3d7c11de02a1982c5ca) - Dont require admin user env variable *(commit by [@alex289](https://github.com/alex289))*
@@ -45,3 +52,4 @@ _This is the initial release._
 [v1.1.2]: https://github.com/alex289/docker-discord-bot/compare/v1.1.1...v1.1.2
 [v1.2.0]: https://github.com/alex289/docker-discord-bot/compare/v1.1.2...v1.2.0
 [v1.3.0]: https://github.com/alex289/docker-discord-bot/compare/v1.2.0...v1.3.0
+[v1.4.0]: https://github.com/alex289/docker-discord-bot/compare/v1.3.0...v1.4.0
