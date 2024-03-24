@@ -1,9 +1,12 @@
 using DockerDiscordBot.Commands.CreateContainer;
 using DockerDiscordBot.Commands.GetContainers;
 using DockerDiscordBot.Commands.GetDockerInfo;
+using DockerDiscordBot.Commands.GetImages;
 using DockerDiscordBot.Commands.Help;
 using DockerDiscordBot.Commands.Ping;
+using DockerDiscordBot.Commands.PullImage;
 using DockerDiscordBot.Commands.RemoveContainer;
+using DockerDiscordBot.Commands.RemoveImage;
 using DockerDiscordBot.Commands.RestartContainer;
 using DockerDiscordBot.Commands.ShowContainer;
 using DockerDiscordBot.Commands.StartContainer;
@@ -24,6 +27,9 @@ public static class CommandMapping
         { "dockerremove", typeof(RemoveContainerCommand) },
         { "dockershow", typeof(ShowContainerCommand) },
         { "dockercreate", typeof(CreateContainerCommand) },
-        { "dockerinfo", typeof(GetDockerInfoCommand) }
+        { "dockerinfo", typeof(GetDockerInfoCommand) },
+        { "dockerimages", typeof(GetImagesCommand) },
+        { "dockerpull", typeof(PullImageCommand) },
+        { "dockerremoveimage", typeof(RemoveImageCommand) }
     };
 }

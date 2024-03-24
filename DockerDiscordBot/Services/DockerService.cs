@@ -157,4 +157,74 @@ public sealed class DockerService : IDockerService
             return null;
         }
     }
+
+    public async Task<bool> PullImageAsync(string image, string tag, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _client.Images.CreateImageAsync(
+                new ImagesCreateParameters
+                {
+                    FromImage = image,
+                    Tag = tag
+                },
+                new AuthConfig(),
+                new Progress<JSONMessage>(),
+                cancellationToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to pull image {Image}:{Tag}.", image, tag);
+            return false;
+        }
+    }
+
+    public async Task<bool> RemoveImageAsync(string image, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _client.Images.DeleteImageAsync(
+                image,
+                new ImageDeleteParameters(),
+                cancellationToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to pull image {Image}.", image);
+            return false;
+        }
+    }
+
+    public async Task<IList<ImagesListResponse>?> GetAllImagesAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _client.Images.ListImagesAsync(
+                new ImagesListParameters(),
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get images.");
+            return null;
+        }
+    }
+
+    public async Task<bool> ImageExistsAsync(string image, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var result = await _client.Images.InspectImageAsync(
+                image,
+                cancellationToken);
+            return result is not null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to find image {Image}.", image);
+            return false;
+        }
+    }
 }

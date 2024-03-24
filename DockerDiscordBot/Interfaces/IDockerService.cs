@@ -17,4 +17,9 @@ public interface IDockerService
 
     Task<ContainerInspectResponse?> GetContainerAsync(string containerId, CancellationToken cancellationToken);
     Task<SystemInfoResponse?> GetDockerInfoAsync(CancellationToken cancellationToken);
+
+    Task<bool> PullImageAsync(string image, string tag, CancellationToken cancellationToken);
+    Task<bool> RemoveImageAsync(string image, CancellationToken cancellationToken);
+    Task<IList<ImagesListResponse>?> GetAllImagesAsync(CancellationToken cancellationToken);
+    Task<bool> ImageExistsAsync(string image, CancellationToken cancellationToken);
 }
