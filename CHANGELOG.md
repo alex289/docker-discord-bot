@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.3.0] - 2024-03-24
+### :bug: Bug Fixes
+- [`ff2cef3`](https://github.com/alex289/docker-discord-bot/commit/ff2cef382656dd8a0977e3d7c11de02a1982c5ca) - Dont require admin user env variable *(commit by [@alex289](https://github.com/alex289))*
+- [`cfc102f`](https://github.com/alex289/docker-discord-bot/commit/cfc102fab4827f644ee3e073056badac22d3f7e3) - Add missing versions to the changelog *(commit by [@alex289](https://github.com/alex289))*
+
+### :wrench: Chores
+- [`2ee8437`](https://github.com/alex289/docker-discord-bot/commit/2ee8437e5fb834ae7518f488c01386962aee0e93) - Apply IDE suggestions *(commit by [@alex289](https://github.com/alex289))*
+
+
 ## [v1.2.0] - 2024-03-23
 ### :sparkles: New Features
 - [`0543483`](https://github.com/alex289/docker-discord-bot/commit/05434836500ac463f422c07f1f10892b4f63b815) - Add a list of commands to the docs *(commit by [@alex289](https://github.com/alex289))*
@@ -35,3 +44,4 @@ _This is the initial release._
 [v1.1.1]: https://github.com/alex289/docker-discord-bot/compare/v1.1.0...v1.1.1
 [v1.1.2]: https://github.com/alex289/docker-discord-bot/compare/v1.1.1...v1.1.2
 [v1.2.0]: https://github.com/alex289/docker-discord-bot/compare/v1.1.2...v1.2.0
+[v1.3.0]: https://github.com/alex289/docker-discord-bot/compare/v1.2.0...v1.3.0
