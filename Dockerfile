@@ -23,4 +23,5 @@ COPY --from=publish /app/publish .
 LABEL org.opencontainers.image.authors="Alexander Konietzko"
 LABEL org.opencontainers.image.title="Docker Discord Bot"
 LABEL org.opencontainers.image.description="An easy-to-use Discord bot to manage your Docker containers"
+LABEL org.opencontainers.image.source = "https://github.com/alex289/docker-discord-bot"
 ENTRYPOINT ["dotnet", "DockerDiscordBot.dll"]
