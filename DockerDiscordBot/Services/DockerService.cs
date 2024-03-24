@@ -11,6 +11,7 @@ public sealed class DockerService : IDockerService
 {
     private readonly DockerClient _client;
     private readonly ILogger<DockerService> _logger;
+    private readonly ApplicationSettings _options;
 
     public DockerService(
         IOptions<ApplicationSettings> options,
@@ -20,6 +21,7 @@ public sealed class DockerService : IDockerService
         _client = new DockerClientConfiguration(
                 new Uri(options.Value.DockerHost))
             .CreateClient();
+        _options = options.Value;
     }
 
     public async Task<IList<ContainerListResponse>?> GetAllContainersAsync(CancellationToken cancellationToken)
@@ -190,7 +192,12 @@ public sealed class DockerService : IDockerService
                     FromImage = image,
                     Tag = tag
                 },
-                new AuthConfig(),
+                new AuthConfig
+                {
+                    ServerAddress = _options.DockerRegistryUrl,
+                    Username = _options.DockerRegistryUsername,
+                    Password = _options.DockerRegistryPassword
+                },
                 new Progress<JSONMessage>(),
                 cancellationToken);
             return true;
