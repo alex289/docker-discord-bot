@@ -17,7 +17,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`0d8ec88`](https://github.com/alex289/docker-discord-bot/commit/0d8ec882390fa464b0946c2adeba24076044ea75) - Dont create release as draft *(commit by [@alex289](https://github.com/alex289))*
 
 
+## [v1.1.1] - 2024-03-23
+### :bug: Bug Fixes
+- [`b33e5ae`](https://github.com/alex289/docker-discord-bot/commit/b33e5ae7ffe90d91a0a91a1ac60860eacf6533a5) - Update changelog file *(commit by @alex289)*
+
+
+## [v1.1.0] - 2024-03-23
+### :sparkles: New Features
+- [`8b8da54`](https://github.com/alex289/docker-discord-bot/commit/8b8da54bd21c760250295e998f0c56edd69245cb) - Add automated release *(commit by @alex289)*
+
+
 ## [v1.0.0] - 2024-03-23
 _This is the initial release._
+
+[v1.0.0]: https://github.com/alex289/docker-discord-bot/commits/v1.0.0
+[v1.1.0]: https://github.com/alex289/docker-discord-bot/compare/v1.0.0...v1.1.0
+[v1.1.1]: https://github.com/alex289/docker-discord-bot/compare/v1.1.0...v1.1.1
 [v1.1.2]: https://github.com/alex289/docker-discord-bot/compare/v1.1.1...v1.1.2
 [v1.2.0]: https://github.com/alex289/docker-discord-bot/compare/v1.1.2...v1.2.0
