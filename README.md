@@ -2,6 +2,8 @@
 
 ![GitHub License](https://img.shields.io/github/license/alex289/docker-discord-bot)
 ![Docker Pulls](https://img.shields.io/docker/pulls/alexdev28/docker-discord-bot)
+[![CodeFactor](https://www.codefactor.io/repository/github/alex289/docker-discord-bot/badge)](https://www.codefactor.io/repository/github/alex289/docker-discord-bot)
+![Docker Image Size](https://img.shields.io/docker/image-size/alexdev28/docker-discord-bot)
 
 An easy-to-use Discord bot to manage your Docker containers.
 
@@ -32,7 +34,7 @@ An easy-to-use Discord bot to manage your Docker containers.
 | `!dockerpull <image>:<tag>/<image>` | Pull an image |
 | `!dockerremoveimage <image>` | Remove an image |
 
-## Installation 🚀
+## Installation
 
 ### Discord Bot Setup
 
