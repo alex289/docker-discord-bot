@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.RemoveContainer;
 
-public sealed class RemoveContainerCommandHandler : IRequestHandler<RemoveContainerCommand>
+public sealed class RemoveContainerCommandHandler : CommandHandler<RemoveContainerCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<RemoveContainerCommandHandler> _logger;
 
-    public RemoveContainerCommandHandler(ILogger<RemoveContainerCommandHandler> logger, IDockerService dockerService)
+    public RemoveContainerCommandHandler(
+        ILogger<RemoveContainerCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(RemoveContainerCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(RemoveContainerCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(RemoveContainerCommand));
+        Logger.LogInformation("Executing {Command}", nameof(RemoveContainerCommand));
 
         var containerId = request.Message.Content.Split(" ").LastOrDefault();
 

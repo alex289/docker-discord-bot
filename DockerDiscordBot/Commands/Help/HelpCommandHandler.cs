@@ -7,22 +7,20 @@ using Microsoft.Extensions.Options;
 
 namespace DockerDiscordBot.Commands.Help;
 
-public sealed class HelpCommandHandler : IRequestHandler<HelpCommand>
+public sealed class HelpCommandHandler : CommandHandler<HelpCommand>
 {
     private readonly string _commandPrefix;
-    private readonly ILogger<HelpCommandHandler> _logger;
 
     public HelpCommandHandler(
         ILogger<HelpCommandHandler> logger,
-        IOptions<ApplicationSettings> options)
+        IOptions<ApplicationSettings> options) : base(logger)
     {
-        _logger = logger;
         _commandPrefix = options.Value.CommandPrefix;
     }
 
-    public async Task Handle(HelpCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(HelpCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(HelpCommand));
+        Logger.LogInformation("Executing {Command}", nameof(HelpCommand));
 
         var commands = CommandMapping.Commands.Keys.Select(key => $"`{_commandPrefix}{key}`").ToList();
 

@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.RemoveImage;
 
-public sealed class RemoveImageCommandHandler : IRequestHandler<RemoveImageCommand>
+public sealed class RemoveImageCommandHandler : CommandHandler<RemoveImageCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<RemoveImageCommandHandler> _logger;
 
-    public RemoveImageCommandHandler(ILogger<RemoveImageCommandHandler> logger, IDockerService dockerService)
+    public RemoveImageCommandHandler(
+        ILogger<RemoveImageCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(RemoveImageCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(RemoveImageCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(RemoveImageCommand));
+        Logger.LogInformation("Executing {Command}", nameof(RemoveImageCommand));
 
         var image = request.Message.Content.Split(" ").LastOrDefault();
 

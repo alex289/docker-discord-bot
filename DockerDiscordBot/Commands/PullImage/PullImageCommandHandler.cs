@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.PullImage;
 
-public sealed class PullImageCommandHandler : IRequestHandler<PullImageCommand>
+public sealed class PullImageCommandHandler : CommandHandler<PullImageCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<PullImageCommandHandler> _logger;
 
-    public PullImageCommandHandler(ILogger<PullImageCommandHandler> logger, IDockerService dockerService)
+    public PullImageCommandHandler(
+        ILogger<PullImageCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(PullImageCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(PullImageCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(PullImageCommand));
+        Logger.LogInformation("Executing {Command}", nameof(PullImageCommand));
 
         var image = request.Message.Content.Split(" ").LastOrDefault();
 

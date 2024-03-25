@@ -5,20 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.ShowContainer;
 
-public sealed class ShowContainerCommandHandler : IRequestHandler<ShowContainerCommand>
+public sealed class ShowContainerCommandHandler : CommandHandler<ShowContainerCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<ShowContainerCommandHandler> _logger;
 
-    public ShowContainerCommandHandler(ILogger<ShowContainerCommandHandler> logger, IDockerService dockerService)
+    public ShowContainerCommandHandler(
+        ILogger<ShowContainerCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(ShowContainerCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(ShowContainerCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(ShowContainerCommand));
+        Logger.LogInformation("Executing {Command}", nameof(ShowContainerCommand));
 
         var containerId = request.Message.Content.Split(" ").LastOrDefault();
 

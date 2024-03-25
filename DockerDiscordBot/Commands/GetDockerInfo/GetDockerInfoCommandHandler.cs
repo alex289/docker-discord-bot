@@ -5,20 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.GetDockerInfo;
 
-public sealed class GetDockerInfoCommandHandler : IRequestHandler<GetDockerInfoCommand>
+public sealed class GetDockerInfoCommandHandler : CommandHandler<GetDockerInfoCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<GetDockerInfoCommandHandler> _logger;
 
-    public GetDockerInfoCommandHandler(ILogger<GetDockerInfoCommandHandler> logger, IDockerService dockerService)
+    public GetDockerInfoCommandHandler(
+        ILogger<GetDockerInfoCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(GetDockerInfoCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(GetDockerInfoCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(GetDockerInfoCommand));
+        Logger.LogInformation("Executing {Command}", nameof(GetDockerInfoCommand));
 
 
         var result = await _dockerService.GetDockerInfoAsync(cancellationToken);

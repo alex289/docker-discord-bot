@@ -5,20 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.GetImages;
 
-public sealed class GetImagesCommandHandler : IRequestHandler<GetImagesCommand>
+public sealed class GetImagesCommandHandler : CommandHandler<GetImagesCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<GetImagesCommandHandler> _logger;
 
-    public GetImagesCommandHandler(ILogger<GetImagesCommandHandler> logger, IDockerService dockerService)
+    public GetImagesCommandHandler(
+        ILogger<GetImagesCommandHandler> logger,
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(GetImagesCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(GetImagesCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(GetImagesCommand));
+        Logger.LogInformation("Executing {Command}", nameof(GetImagesCommand));
 
         var images = await _dockerService.GetAllImagesAsync(cancellationToken);
 

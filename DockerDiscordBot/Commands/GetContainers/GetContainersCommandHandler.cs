@@ -5,22 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.GetContainers;
 
-public sealed class GetContainersCommandHandler : IRequestHandler<GetContainersCommand>
+public sealed class GetContainersCommandHandler : CommandHandler<GetContainersCommand>
 {
     private readonly IDockerService _dockerService;
-    private readonly ILogger<GetContainersCommandHandler> _logger;
 
     public GetContainersCommandHandler(
         ILogger<GetContainersCommandHandler> logger,
-        IDockerService dockerService)
+        IDockerService dockerService) : base(logger)
     {
-        _logger = logger;
         _dockerService = dockerService;
     }
 
-    public async Task Handle(GetContainersCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(GetContainersCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(GetContainersCommand));
+        Logger.LogInformation("Executing {Command}", nameof(GetContainersCommand));
 
         var containers = await _dockerService.GetAllContainersAsync(cancellationToken);
 

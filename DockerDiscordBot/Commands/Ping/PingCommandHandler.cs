@@ -3,18 +3,15 @@ using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.Ping;
 
-public sealed class PingCommandHandler : IRequestHandler<PingCommand>
+public sealed class PingCommandHandler : CommandHandler<PingCommand>
 {
-    private readonly ILogger<PingCommandHandler> _logger;
-
-    public PingCommandHandler(ILogger<PingCommandHandler> logger)
+    public PingCommandHandler(ILogger<PingCommandHandler> logger) : base(logger)
     {
-        _logger = logger;
     }
 
-    public async Task Handle(PingCommand request, CancellationToken cancellationToken)
+    public override async Task Handle(PingCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Executing {Command}", nameof(PingCommand));
+        Logger.LogInformation("Executing {Command}", nameof(PingCommand));
         await request.Message.Channel.SendMessageAsync("pong!");
     }
 }
