@@ -27,8 +27,8 @@ public sealed class PullImageCommandHandler : CommandHandler<PullImageCommand>
             return;
         }
 
-        var imageWithoutTag = image.Contains(":") ? image.Split(":").First() : image;
-        var tag = image.Contains(":") ? image.Split(":").Last() : "latest";
+        var imageWithoutTag = image.Contains(":") ? image.Split(":")[0] : image;
+        var tag = image.Contains(":") ? image.Split(":")[^1] : "latest";
 
         await request.Message.Channel.SendMessageAsync($"Pulling image {imageWithoutTag}:{tag}.");
 

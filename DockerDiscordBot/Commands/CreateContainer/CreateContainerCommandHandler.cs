@@ -37,8 +37,8 @@ public sealed class CreateContainerCommandHandler : CommandHandler<CreateContain
             return;
         }
 
-        var imageWithoutTag = image.Contains(":") ? image.Split(":").First() : image;
-        var tag = image.Contains(":") ? image.Split(":").Last() : "latest";
+        var imageWithoutTag = image.Contains(":") ? image.Split(":")[0] : image;
+        var tag = image.Contains(":") ? image.Split(":")[^1] : "latest";
 
         var imageExists = await _dockerService.ImageExistsAsync(image, cancellationToken);
 
@@ -63,7 +63,7 @@ public sealed class CreateContainerCommandHandler : CommandHandler<CreateContain
             foreach (var portPair in portPairs)
             {
                 var port = portPair.Split(":");
-                portMapping.Add(port.First(), port.Last());
+                portMapping.Add(port[0], port[^1]);
             }
         }
 
