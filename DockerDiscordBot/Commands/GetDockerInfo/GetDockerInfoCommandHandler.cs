@@ -1,6 +1,5 @@
 using Discord;
 using DockerDiscordBot.Interfaces;
-using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace DockerDiscordBot.Commands.GetDockerInfo;

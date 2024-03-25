@@ -1,7 +1,6 @@
 using Discord;
 using DockerDiscordBot.Mappings;
 using DockerDiscordBot.Settings;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
