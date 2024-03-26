@@ -19,19 +19,16 @@ public sealed class ShowContainerCommandHandler : CommandHandler<ShowContainerCo
     {
         Logger.LogInformation("Executing {Command}", nameof(ShowContainerCommand));
 
-        var containerId = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(containerId))
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide a container id.");
             return;
         }
 
-        var result = await _dockerService.GetContainerAsync(containerId, cancellationToken);
+        var result = await _dockerService.GetContainerAsync(request.ContainerId, cancellationToken);
 
         if (result is null)
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to get container {containerId}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to get container {request.ContainerId}.");
             return;
         }
 

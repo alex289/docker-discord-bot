@@ -18,23 +18,20 @@ public sealed class RemoveContainerCommandHandler : CommandHandler<RemoveContain
     {
         Logger.LogInformation("Executing {Command}", nameof(RemoveContainerCommand));
 
-        var containerId = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(containerId))
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide a container id.");
             return;
         }
 
-        var result = await _dockerService.RemoveContainerAsync(containerId, cancellationToken);
+        var result = await _dockerService.RemoveContainerAsync(request.ContainerId, cancellationToken);
 
         if (result)
         {
-            await request.Message.Channel.SendMessageAsync($"Container {containerId} removed.");
+            await request.Message.Channel.SendMessageAsync($"Container {request.ContainerId} removed.");
         }
         else
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to remove container {containerId}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to remove container {request.ContainerId}.");
         }
     }
 }

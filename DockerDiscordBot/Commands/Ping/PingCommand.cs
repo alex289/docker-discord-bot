@@ -7,4 +7,6 @@ public sealed class PingCommand : Command
     public PingCommand(SocketMessage message) : base(message)
     {
     }
+
+    public override bool IsValid() => true;
 }

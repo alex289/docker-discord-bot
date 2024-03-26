@@ -19,7 +19,6 @@ public sealed class GetDockerInfoCommandHandler : CommandHandler<GetDockerInfoCo
     {
         Logger.LogInformation("Executing {Command}", nameof(GetDockerInfoCommand));
 
-
         var result = await _dockerService.GetDockerInfoAsync(cancellationToken);
 
         if (result is null)

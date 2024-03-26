@@ -18,21 +18,18 @@ public sealed class PullImageCommandHandler : CommandHandler<PullImageCommand>
     {
         Logger.LogInformation("Executing {Command}", nameof(PullImageCommand));
 
-        var image = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(image))
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide an image.");
             return;
         }
 
-        var imageWithoutTag = image.Contains(":") ? image.Split(":")[0] : image;
-        var tag = image.Contains(":") ? image.Split(":")[^1] : "latest";
+        var imageWithoutTag = request.ImageId.Contains(":") ? request.ImageId.Split(":")[0] : request.ImageId;
+        var tag = request.ImageId.Contains(":") ? request.ImageId.Split(":")[^1] : "latest";
 
         await request.Message.Channel.SendMessageAsync($"Pulling image {imageWithoutTag}:{tag}.");
 
         var result = await _dockerService.PullImageAsync(
-            image,
+            request.ImageId,
             tag,
             cancellationToken);
 

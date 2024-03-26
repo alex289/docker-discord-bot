@@ -17,24 +17,21 @@ public sealed class StartContainerCommandHandler : CommandHandler<StartContainer
     public override async Task Handle(StartContainerCommand request, CancellationToken cancellationToken)
     {
         Logger.LogInformation("Executing {Command}", nameof(StartContainerCommand));
-
-        var containerId = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(containerId))
+        
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide a container id.");
             return;
         }
 
-        var result = await _dockerService.StartContainerAsync(containerId, cancellationToken);
+        var result = await _dockerService.StartContainerAsync(request.ContainerId, cancellationToken);
 
         if (result)
         {
-            await request.Message.Channel.SendMessageAsync($"Container {containerId} started.");
+            await request.Message.Channel.SendMessageAsync($"Container {request.ContainerId} started.");
         }
         else
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to start container {containerId}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to start container {request.ContainerId}.");
         }
     }
 }

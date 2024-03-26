@@ -18,23 +18,20 @@ public sealed class RestartContainerCommandHandler : CommandHandler<RestartConta
     {
         Logger.LogInformation("Executing {Command}", nameof(RestartContainerCommand));
 
-        var containerId = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(containerId))
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide a container id.");
             return;
         }
 
-        var result = await _dockerService.RestartContainerAsync(containerId, cancellationToken);
+        var result = await _dockerService.RestartContainerAsync(request.ContainerId, cancellationToken);
 
         if (result)
         {
-            await request.Message.Channel.SendMessageAsync($"Container {containerId} restarted.");
+            await request.Message.Channel.SendMessageAsync($"Container {request.ContainerId} restarted.");
         }
         else
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to restart container {containerId}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to restart container {request.ContainerId}.");
         }
     }
 }

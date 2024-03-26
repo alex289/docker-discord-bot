@@ -18,23 +18,20 @@ public sealed class RemoveImageCommandHandler : CommandHandler<RemoveImageComman
     {
         Logger.LogInformation("Executing {Command}", nameof(RemoveImageCommand));
 
-        var image = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(image))
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide an image.");
             return;
         }
 
-        var result = await _dockerService.RemoveImageAsync(image, cancellationToken);
+        var result = await _dockerService.RemoveImageAsync(request.ImageId, cancellationToken);
 
         if (result)
         {
-            await request.Message.Channel.SendMessageAsync($"Image {image} removed.");
+            await request.Message.Channel.SendMessageAsync($"Image {request.ImageId} removed.");
         }
         else
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to remove image {image}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to remove image {request.ImageId}.");
         }
     }
 }

@@ -17,24 +17,21 @@ public sealed class StopContainerCommandHandler : CommandHandler<StopContainerCo
     public override async Task Handle(StopContainerCommand request, CancellationToken cancellationToken)
     {
         Logger.LogInformation("Executing {Command}", nameof(StopContainerCommand));
-
-        var containerId = request.Message.Content.Split(" ").LastOrDefault();
-
-        if (string.IsNullOrWhiteSpace(containerId))
+        
+        if (!await TestValidityAsync(request))
         {
-            await request.Message.Channel.SendMessageAsync("Please provide a container id.");
             return;
         }
 
-        var result = await _dockerService.StopContainerAsync(containerId, cancellationToken);
+        var result = await _dockerService.StopContainerAsync(request.ContainerId, cancellationToken);
 
         if (result)
         {
-            await request.Message.Channel.SendMessageAsync($"Container {containerId} stopped.");
+            await request.Message.Channel.SendMessageAsync($"Container {request.ContainerId} stopped.");
         }
         else
         {
-            await request.Message.Channel.SendMessageAsync($"Failed to stop container {containerId}.");
+            await request.Message.Channel.SendMessageAsync($"Failed to stop container {request.ContainerId}.");
         }
     }
 }
