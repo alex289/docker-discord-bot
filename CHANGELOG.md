@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.6.0] - 2024-04-01
+### :sparkles: New Features
+- [`83765ef`](https://github.com/alex289/docker-discord-bot/commit/83765ef1dd1c67a44b9bde7170d9d7a96d3d451d) - Add Docker dependabot updates *(commit by [@alex289](https://github.com/alex289))*
+
+### :wrench: Chores
+- [`8b65386`](https://github.com/alex289/docker-discord-bot/commit/8b6538650e78e32fad304347a9186ac862afaec7) - Bump the dependencies group with 3 updates *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`676df15`](https://github.com/alex289/docker-discord-bot/commit/676df15e752272283702643d82db1a6bc050a3d1) - Bump the dependencies group with 3 updates *(PR [#2](https://github.com/alex289/docker-discord-bot/pull/2) by [@alex289](https://github.com/alex289))*
+- [`014783b`](https://github.com/alex289/docker-discord-bot/commit/014783b080835069c0205f9ebfc24348fb21de80) - Code Cleanup *(commit by [@alex289](https://github.com/alex289))*
+
+
 ## [v1.5.0] - 2024-03-26
 ### :sparkles: New Features
 - [`f23fdf2`](https://github.com/alex289/docker-discord-bot/commit/f23fdf2b0e0bff3e7c20b099035f807dec4279e7) - Add a base command handler *(commit by [@alex289](https://github.com/alex289))*
@@ -65,3 +75,4 @@ _This is the initial release._
 [v1.3.0]: https://github.com/alex289/docker-discord-bot/compare/v1.2.0...v1.3.0
 [v1.4.0]: https://github.com/alex289/docker-discord-bot/compare/v1.3.0...v1.4.0
 [v1.5.0]: https://github.com/alex289/docker-discord-bot/compare/v1.4.0...v1.5.0
+[v1.6.0]: https://github.com/alex289/docker-discord-bot/compare/v1.5.0...v1.6.0
