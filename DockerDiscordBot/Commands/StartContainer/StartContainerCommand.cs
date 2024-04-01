@@ -11,7 +11,7 @@ public sealed class StartContainerCommand : Command
     public StartContainerCommand(SocketMessage message) : base(message)
     {
     }
-    
+
     public override bool IsValid()
     {
         ValidationResult = s_validation.Validate(this);

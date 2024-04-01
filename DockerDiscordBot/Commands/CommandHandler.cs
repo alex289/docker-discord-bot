@@ -13,7 +13,7 @@ public abstract class CommandHandler<T> : IRequestHandler<T> where T : Command
     }
 
     public abstract Task Handle(T request, CancellationToken cancellationToken);
-    
+
     protected async ValueTask<bool> TestValidityAsync(Command command)
     {
         if (command.IsValid())
@@ -26,10 +26,10 @@ public abstract class CommandHandler<T> : IRequestHandler<T> where T : Command
             throw new InvalidOperationException("Command is invalid and should therefore have a validation result");
         }
 
-        foreach (var error in command.ValidationResult!.Errors)
+        foreach (var error in command.ValidationResult.Errors.Select(x => x.ErrorMessage))
         {
-            Logger.LogWarning("Validation error: {ErrorMessage}", error.ErrorMessage);
-            await command.Message.Channel.SendMessageAsync(error.ErrorMessage);
+            Logger.LogWarning("Validation error: {ErrorMessage}", error);
+            await command.Message.Channel.SendMessageAsync(error);
         }
 
         return false;

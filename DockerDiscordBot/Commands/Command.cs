@@ -13,6 +13,6 @@ public abstract class Command : IRequest
     {
         Message = message;
     }
-    
+
     public abstract bool IsValid();
 }

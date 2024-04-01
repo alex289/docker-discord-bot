@@ -10,7 +10,7 @@ public sealed class CreateContainerCommandValidation : CommandValidation<CreateC
         AddRuleForImageId();
         AddRuleForContainerName();
     }
-    
+
     private void AddRuleForImageId()
     {
         RuleFor(x => x.ImageId)

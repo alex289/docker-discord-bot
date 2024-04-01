@@ -17,7 +17,7 @@ public sealed class StopContainerCommandHandler : CommandHandler<StopContainerCo
     public override async Task Handle(StopContainerCommand request, CancellationToken cancellationToken)
     {
         Logger.LogInformation("Executing {Command}", nameof(StopContainerCommand));
-        
+
         if (!await TestValidityAsync(request))
         {
             return;

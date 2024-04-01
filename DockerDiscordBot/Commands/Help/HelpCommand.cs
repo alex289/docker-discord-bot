@@ -7,6 +7,9 @@ public sealed class HelpCommand : Command
     public HelpCommand(SocketMessage message) : base(message)
     {
     }
-    
-    public override bool IsValid() => true;
+
+    public override bool IsValid()
+    {
+        return true;
+    }
 }

@@ -12,17 +12,17 @@ public abstract class CommandValidation<T> : AbstractValidator<T> where T : Comm
         {
             return;
         }
-        
+
         RuleFor(x => x.Message.Content)
             .NotEmpty()
             .WithMessage("Message content cannot be empty.");
-        
+
         if (parameterMinAmount is not null && parameterMaxAmount is not null)
         {
             var message = parameterMinAmount == parameterMaxAmount
                 ? $"Message content must have exactly {parameterMinAmount} parameter(s)."
                 : $"Message content must have between {parameterMinAmount} and {parameterMaxAmount} parameter(s).";
-            
+
             RuleFor(x => x.Message.Content.Split(" ", StringSplitOptions.None))
                 .Must(x => x.Length >= parameterMinAmount + 1 && x.Length <= parameterMaxAmount + 1)
                 .WithMessage(message);

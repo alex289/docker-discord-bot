@@ -8,5 +8,8 @@ public sealed class PingCommand : Command
     {
     }
 
-    public override bool IsValid() => true;
+    public override bool IsValid()
+    {
+        return true;
+    }
 }

@@ -17,7 +17,7 @@ public sealed class StartContainerCommandHandler : CommandHandler<StartContainer
     public override async Task Handle(StartContainerCommand request, CancellationToken cancellationToken)
     {
         Logger.LogInformation("Executing {Command}", nameof(StartContainerCommand));
-        
+
         if (!await TestValidityAsync(request))
         {
             return;
