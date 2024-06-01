@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.7.0] - 2024-06-01
+### :bug: Bug Fixes
+- [`44b3703`](https://github.com/alex289/docker-discord-bot/commit/44b3703fda3c0bf26be6a3e21ee46b2597098c62) - Wrong package dependency *(commit by [@alex289](https://github.com/alex289))*
+
+### :wrench: Chores
+- [`1c4626f`](https://github.com/alex289/docker-discord-bot/commit/1c4626fdbb086c2ef540ae6516a9b0648be3bece) - Bump FluentValidation in the dependencies group *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`bcc3fbf`](https://github.com/alex289/docker-discord-bot/commit/bcc3fbf4112d542dc02204767d1339164a8c1a88) - Bump FluentValidation from 11.9.0 to 11.9.1 in the dependencies group *(PR [#3](https://github.com/alex289/docker-discord-bot/pull/3) by [@alex289](https://github.com/alex289))*
+- [`3490ed1`](https://github.com/alex289/docker-discord-bot/commit/3490ed1879127fd30b0618663ae91b7e710f2f08) - Bump Discord.Net.Interactions in the dependencies group *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [v1.6.0] - 2024-04-01
 ### :sparkles: New Features
 - [`83765ef`](https://github.com/alex289/docker-discord-bot/commit/83765ef1dd1c67a44b9bde7170d9d7a96d3d451d) - Add Docker dependabot updates *(commit by [@alex289](https://github.com/alex289))*
@@ -76,3 +86,4 @@ _This is the initial release._
 [v1.4.0]: https://github.com/alex289/docker-discord-bot/compare/v1.3.0...v1.4.0
 [v1.5.0]: https://github.com/alex289/docker-discord-bot/compare/v1.4.0...v1.5.0
 [v1.6.0]: https://github.com/alex289/docker-discord-bot/compare/v1.5.0...v1.6.0
+[v1.7.0]: https://github.com/alex289/docker-discord-bot/compare/v1.6.0...v1.7.0
