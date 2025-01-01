@@ -88,5 +88,5 @@ The bot can be configured using environment variables:
 
 ## License
 
-© [Alexander Konietzko](https://alexanderkonietzko.com) 2024  
+© [Alexander Konietzko](https://alexanderkonietzko.com) 2025  
 Released under the [MIT license](https://github.com/alex289/docker-discord-bot/blob/main/LICENSE)
