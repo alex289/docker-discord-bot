@@ -31,7 +31,7 @@ jobs:
           toTag: ${{ env.previousTag }}
 
       - name: Create Release
-        uses: ncipollo/release-action@v1.14.0
+        uses: ncipollo/release-action@v1.15.0
         with:
           allowUpdates: true
           draft: false
