@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -22,12 +22,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Discord.Net.WebSocket" Version="3.17.1" />
+        <PackageReference Include="Discord.Net.WebSocket" Version="3.17.2" />
         <PackageReference Include="Docker.DotNet" Version="3.125.15"/>
         <PackageReference Include="FluentValidation" Version="11.11.0"/>
         <PackageReference Include="MediatR" Version="12.4.1"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
     </ItemGroup>
 
 </Project>
