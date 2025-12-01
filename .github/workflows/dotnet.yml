@@ -15,13 +15,13 @@ jobs:
       projectName: CleanArchitecture
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
-          9.x.x
+          10.x.x
 
     - name: Restore dependencies
       run: dotnet restore
