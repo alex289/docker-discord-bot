@@ -11,7 +11,7 @@ jobs:
   build_and_test:
     runs-on: ubuntu-latest
     env:
-      solutionFile: CleanArchitecture.sln
+      solutionFile: CleanArchitecture.slnx
       projectName: CleanArchitecture
 
     steps:
