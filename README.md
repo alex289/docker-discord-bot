@@ -59,8 +59,6 @@ docker run \
 Or with docker compose:
 
 ```yaml
-version: '3.8'
-
 services:
   docker-discord-bot:
     image: alexdev28/docker-discord-bot:latest
